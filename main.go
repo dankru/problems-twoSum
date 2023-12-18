@@ -3,18 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(twoSum([]int{2, 7, 11, 15}, 9))
+	// O(n) Time and space
+	fmt.Println(twoSum([]int{3, 3}, 6))
 }
 
 func twoSum(nums []int, target int) []int {
-
-	for i, v := range nums {
-		for j, n := range nums[i+1:] {
-
-			if v+n == target {
-				return []int{i, j + i + 1}
-			}
+	m := map[int]int{}
+	m[nums[0]] = 0
+	for i := 1; i < len(nums); i++ {
+		wantedNumber := target - nums[i]
+		index, ok := m[wantedNumber]
+		if ok {
+			return []int{index, i}
 		}
+		m[nums[i]] = i
 	}
-	return nil
+	return []int{}
 }
